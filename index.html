@@ -2,42 +2,67 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Personal Agent</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Personal Agent • sd.vishalojha.me</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:system-ui;background:#0e1015;color:#e5e7eb;display:flex;flex-direction:column;height:100vh}
-header{padding:16px 20px;background:#161920;border-bottom:1px solid #222}
-h1{margin:0;font-size:18px}
-main{flex:1;display:flex}
-sidebar{width:240px;background:#111418;border-right:1px solid #222;padding:12px}
-chat{flex:1;display:flex;flex-direction:column}
-messages{flex:1;padding:20px;overflow:auto}
-msg{margin:8px 0;padding:10px 12px;background:#1a1f29;border-radius:8px;max-width:70%}
-input{width:100%;padding:12px;background:#111418;border:1px solid #222;color:#e5e7eb;border-radius:8px}
-footer{padding:12px 20px;border-top:1px solid #222}
-small{color:#888}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui;background:#05070b;color:#e8ecf3;min-height:100vh;display:flex;flex-direction:column}
+header{position:sticky;top:0;backdrop-filter:blur(12px);background:rgba(5,7,11,.7);border-bottom:1px solid rgba(255,255,255,.06);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;z-index:10}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700}
+.logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#7c3aed,#22d3ee);display:grid;place-items:center;color:#fff;font-weight:800}
+nav a{color:#aab3c5;text-decoration:none;margin-left:20px;font-size:14px}
+.hero{flex:1;display:grid;place-items:center;text-align:center;padding:80px 20px}
+h1{font-size:clamp(32px,6vw,64px);line-height:1.05;margin-bottom:16px;background:linear-gradient(90deg,#fff,#a5b4fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:#9aa3b2;max-width:640px;margin:0 auto 32px;font-size:18px}
+.cta{display:inline-flex;gap:12px}
+.btn{padding:12px 20px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#111827;color:#fff;text-decoration:none;font-weight:600;transition:.2s}
+.btn.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
+.btn:hover{transform:translateY(-1px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:1000px;margin:60px auto;padding:0 20px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:20px}
+.card h3{margin-bottom:8px;font-size:18px}
+.card p{color:#9aa3b2;font-size:14px;line-height:1.5}
+footer{padding:24px;text-align:center;color:#6b7280;font-size:13px;border-top:1px solid rgba(255,255,255,.06);margin-top:auto}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(124,58,237,.15);color:#c4b5fd;border:1px solid rgba(124,58,237,.3);padding:6px 10px;border-radius:999px;font-size:12px;font-weight:600;margin-bottom:16px}
 </style>
 </head>
 <body>
-<header><h1>Personal Agent • sd.vishalojha.me</h1></header>
-<main>
-<div class="sidebar">
-<small>WhatsApp</small><br>
-<div id="status">Status: idle</div>
-<p>Allowlist: +919820056180</p>
-<p>Self-chat only</p>
+<header>
+<div class="brand"><div class="logo">PA</div>Personal Agent</div>
+<nav>
+<a href="#features">Features</a>
+<a href="#security">Security</a>
+<a href="#status">Status</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="badge">✦ Self-hosted • Private • Yours</div>
+<h1>Your personal agent, on your server</h1>
+<p class="sub">A beautiful, private WhatsApp self-chat agent running on sd.vishalojha.me. No cloud, no tracking, just you and your own data.</p>
+<div class="cta">
+<a class="btn primary" href="#status">Open Agent</a>
+<a class="btn" href="#features">Learn more</a>
 </div>
-<div class="chat">
-<div class="messages" id="messages"></div>
-<div class="footer">
-<input id="input" placeholder="Type a message..." />
+</section>
+
+<section class="grid" id="features">
+<div class="card"><h3>WhatsApp Self-Chat</h3><p>Allowlist-only access for +919820056180. Messages never leave your server.</p></div>
+<div class="card"><h3>Private by design</h3><p>All state, session and memory stay on sd.vishalojha.me. No external telemetry.</p></div>
+<div class="card"><h3>Zero bloat</h3><p>Built from scratch with Go + whatsmeow. Fast, minimal, auditable.</p></div>
+<div class="card"><h3>Coolify native</h3><p>Deployed on Hetzner via Coolify with automatic HTTPS and zero-downtime deploys.</p></div>
+</section>
+
+<section id="status" style="max-width:800px;margin:40px auto;padding:0 20px">
+<div class="card">
+<h3>Live Status</h3>
+<p>Status: <strong>online</strong> • Allowlist: <strong>+919820056180</strong> • Mode: <strong>Self-chat only</strong></p>
+<p style="margin-top:12px;color:#9aa3b2;font-size:13px">The agent is currently running. Connect via WhatsApp Web to start pairing.</p>
 </div>
-</div>
-</main>
-<script>
-const msgs = document.getElementById('messages');
-function addMsg(t){const d=document.createElement('div');d.className='msg';d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight}
-addMsg('Welcome to your personal agent');
-document.getElementById('input').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.value){addMsg('You: '+e.target.value);e.target.value=''}});
-</script>
+</section>
+
+<footer>© 2026 Vishal Ojha • sd.vishalojha.me</footer>
 </body>
 </html>
