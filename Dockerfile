@@ -1,13 +1,12 @@
-FROM node:24-alpine
-
+FROM golang:1.22-alpine AS builder
 WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN go build -o whatsapp-agent main.go
 
-RUN npm install -g openclaw@latest
-
-COPY defaults/ /opt/oc-defaults/
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
+FROM alpine:latest
+WORKDIR /app
+COPY --from=builder /app/whatsapp-agent .
 EXPOSE 18789
-
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["./whatsapp-agent"]
