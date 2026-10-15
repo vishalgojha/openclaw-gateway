@@ -1,12 +1,7 @@
-FROM golang:1.22-alpine AS builder
+FROM python:3.11-slim
 WORKDIR /app
-COPY go.mod ./
-RUN go mod download
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
-RUN go mod tidy && go build -o whatsapp-agent main.go
-
-FROM alpine:latest
-WORKDIR /app
-COPY --from=builder /app/whatsapp-agent .
 EXPOSE 18789
-CMD ["./whatsapp-agent"]
+CMD ["python","app.py"]
