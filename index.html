@@ -1,1 +1,43 @@
-<html><body><h1>Personal Agent is running</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Personal Agent</title>
+<style>
+body{margin:0;font-family:system-ui;background:#0e1015;color:#e5e7eb;display:flex;flex-direction:column;height:100vh}
+header{padding:16px 20px;background:#161920;border-bottom:1px solid #222}
+h1{margin:0;font-size:18px}
+main{flex:1;display:flex}
+sidebar{width:240px;background:#111418;border-right:1px solid #222;padding:12px}
+chat{flex:1;display:flex;flex-direction:column}
+messages{flex:1;padding:20px;overflow:auto}
+msg{margin:8px 0;padding:10px 12px;background:#1a1f29;border-radius:8px;max-width:70%}
+input{width:100%;padding:12px;background:#111418;border:1px solid #222;color:#e5e7eb;border-radius:8px}
+footer{padding:12px 20px;border-top:1px solid #222}
+small{color:#888}
+</style>
+</head>
+<body>
+<header><h1>Personal Agent • sd.vishalojha.me</h1></header>
+<main>
+<div class="sidebar">
+<small>WhatsApp</small><br>
+<div id="status">Status: idle</div>
+<p>Allowlist: +919820056180</p>
+<p>Self-chat only</p>
+</div>
+<div class="chat">
+<div class="messages" id="messages"></div>
+<div class="footer">
+<input id="input" placeholder="Type a message..." />
+</div>
+</div>
+</main>
+<script>
+const msgs = document.getElementById('messages');
+function addMsg(t){const d=document.createElement('div');d.className='msg';d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight}
+addMsg('Welcome to your personal agent');
+document.getElementById('input').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.value){addMsg('You: '+e.target.value);e.target.value=''}});
+</script>
+</body>
+</html>
