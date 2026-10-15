@@ -1,9 +1,9 @@
 FROM golang:1.22-alpine AS builder
 WORKDIR /app
-COPY go.mod go.sum ./
+COPY go.mod ./
 RUN go mod download
 COPY . .
-RUN go build -o whatsapp-agent main.go
+RUN go mod tidy && go build -o whatsapp-agent main.go
 
 FROM alpine:latest
 WORKDIR /app
