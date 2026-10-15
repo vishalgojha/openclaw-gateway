@@ -4,7 +4,8 @@
     "bind": "custom",
     "customBindHost": "0.0.0.0",
     "auth": {"mode": "token", "token": "21ebff2a2ab5382f8fc8f0db1809b22bdc560cf5475353c4"},
-    "trustedProxies": []
+    "trustedProxies": ["10.0.0.0/8","172.16.0.0/12","192.168.0.0/16"],
+    "allowRealIpFallback": true
   },
   "channels": {
     "whatsapp": {
