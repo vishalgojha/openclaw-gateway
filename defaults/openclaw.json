@@ -4,7 +4,24 @@
     "bind": "custom",
     "customBindHost": "0.0.0.0",
     "auth": {"mode": "token", "token": "21ebff2a2ab5382f8fc8f0db1809b22bdc560cf5475353c4"},
-    "trustedProxies": []
+    "trustedProxies": ["127.0.0.1","::1"]
   },
-  "agents": {"defaults":{"workspace":"/root/.openclaw/workspace","heartbeat":{"every":"10m"}}}
+  "channels": {
+    "whatsapp": {
+      "dmPolicy": "allowlist",
+      "allowFrom": ["+919820056180"],
+      "groupPolicy": "disabled",
+      "sendReadReceipts": true,
+      "groupAllowFrom": ["+919820056180"]
+    }
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "/root/.openclaw/workspace",
+      "heartbeat": {"every": "10m"},
+      "model": {"primary": "anthropic/claude-haiku-4-5"}
+    },
+    "entries": {"main": {}}
+  },
+  "session": {"scope": "per-sender","resetTriggers": ["/new","/reset"]}
 }
