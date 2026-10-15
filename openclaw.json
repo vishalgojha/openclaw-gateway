@@ -1,0 +1,20 @@
+{
+  "gateway": { "mode": "local" },
+  "channels": {
+    "whatsapp": {
+      "dmPolicy": "allowlist",
+      "allowFrom": ["+919820056180"],
+      "groupPolicy": "disabled",
+      "sendReadReceipts": true
+    }
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "/root/.openclaw/workspace",
+      "heartbeat": { "every": "10m", "ackMaxChars": 16 }
+    },
+    "entries": { "main": {} }
+  },
+  "session": { "scope": "per-sender", "resetTriggers": ["/new", "/reset"] },
+  "messages": { "groupChat": { "mentionPatterns": ["@openclaw"] } }
+}
