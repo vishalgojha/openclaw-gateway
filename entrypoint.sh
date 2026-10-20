@@ -20,8 +20,8 @@ fi
 
 # Install the requested ClawHub skills into the persistent workspace. The
 # commands are idempotent and --force refreshes an existing installation.
-openclaw skills install @steipete/gog --force --acknowledge-install-policy-warning
-openclaw skills install @matagul/desktop-control --force --acknowledge-install-policy-warning
+openclaw skills install @steipete/gog --force --acknowledge-install-policy-warning || echo "gog skill install deferred."
+openclaw skills install @matagul/desktop-control --force --acknowledge-install-policy-warning || echo "desktop-control skill install deferred."
 
 # Apply any pending OpenClaw state/database migrations before accepting traffic.
 openclaw doctor --fix || echo "OpenClaw doctor reported a warning; continuing with gateway startup."
