@@ -18,12 +18,13 @@ else
   cp -r /opt/oc-defaults/workspace/* /root/.openclaw/workspace/ 2>/dev/null || true
 fi
 
-# Install the requested ClawHub skills into the persistent workspace. The
-# commands are idempotent and --force refreshes an existing installation.
-openclaw skills install @steipete/gog --force --acknowledge-install-policy-warning || echo "gog skill install deferred."
-openclaw skills install @matagul/desktop-control --force --acknowledge-install-policy-warning || echo "desktop-control skill install deferred."
-
-# Apply any pending OpenClaw state/database migrations before accepting traffic.
-openclaw doctor --fix || echo "OpenClaw doctor reported a warning; continuing with gateway startup."
+# Install the requested skills only once. Reinstalling them on every restart
+# mutates the persistent OpenClaw state while the gateway is booting.
+if [ ! -d /root/.openclaw/workspace/skills/gog ]; then
+  openclaw skills install @steipete/gog --force --acknowledge-install-policy-warning || echo "gog skill install deferred."
+fi
+if [ ! -d /root/.openclaw/workspace/skills/desktop-control ]; then
+  openclaw skills install @matagul/desktop-control --force --acknowledge-install-policy-warning || echo "desktop-control skill install deferred."
+fi
 
 exec node dist/index.js gateway --port 18789 --allow-unconfigured
