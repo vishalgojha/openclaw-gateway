@@ -22,4 +22,4 @@ openclaw skills install @matagul/desktop-control --force --acknowledge-install-p
 # Apply any pending OpenClaw state/database migrations before accepting traffic.
 openclaw doctor --fix
 
-exec openclaw gateway --port 18789
+exec node dist/index.js gateway --port 18789 --allow-unconfigured
