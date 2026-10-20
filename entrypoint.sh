@@ -11,6 +11,12 @@ if [ ! -f /root/.openclaw/.config-seeded ]; then
   touch /root/.openclaw/.config-seeded
 fi
 
+# A friend-facing deployment can put authentication at Coolify's edge. In
+# that mode the browser must not be asked for OpenClaw's operator token.
+if [ "${OPENCLAW_AUTH_MODE:-token}" = "none" ]; then
+  node -e 'const fs=require("fs"); const p="/root/.openclaw/openclaw.json"; const c=JSON.parse(fs.readFileSync(p,"utf8")); c.gateway ??= {}; c.gateway.auth={mode:"none"}; fs.writeFileSync(p, JSON.stringify(c,null,2)+"\n");'
+fi
+
 if [ ! -d /root/.openclaw/workspace ]; then
   cp -r /opt/oc-defaults/workspace /root/.openclaw/workspace
 else
