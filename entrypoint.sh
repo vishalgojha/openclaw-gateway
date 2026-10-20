@@ -19,4 +19,7 @@ fi
 openclaw skills install @steipete/gog --force --acknowledge-install-policy-warning
 openclaw skills install @matagul/desktop-control --force --acknowledge-install-policy-warning
 
+# Apply any pending OpenClaw state/database migrations before accepting traffic.
+openclaw doctor --fix
+
 exec openclaw gateway --port 18789
