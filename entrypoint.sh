@@ -15,6 +15,8 @@ fi
 # that mode the browser must not be asked for OpenClaw's operator token.
 if [ "${OPENCLAW_AUTH_MODE:-token}" = "none" ]; then
   node -e 'const fs=require("fs"); const p="/root/.openclaw/openclaw.json"; const c=JSON.parse(fs.readFileSync(p,"utf8")); c.gateway ??= {}; c.gateway.auth={mode:"none"}; fs.writeFileSync(p, JSON.stringify(c,null,2)+"\n");'
+elif [ -n "${OPENCLAW_GATEWAY_TOKEN:-}" ]; then
+  node -e 'const fs=require("fs"); const p="/root/.openclaw/openclaw.json"; const c=JSON.parse(fs.readFileSync(p,"utf8")); c.gateway ??= {}; c.gateway.auth={mode:"token",token:process.env.OPENCLAW_GATEWAY_TOKEN}; fs.writeFileSync(p, JSON.stringify(c,null,2)+"\n");'
 fi
 
 if [ ! -d /root/.openclaw/workspace ]; then
