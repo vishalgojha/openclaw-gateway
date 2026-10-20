@@ -27,4 +27,4 @@ if [ ! -d /root/.openclaw/workspace/skills/desktop-control ]; then
   openclaw skills install @matagul/desktop-control --force --acknowledge-install-policy-warning || echo "desktop-control skill install deferred."
 fi
 
-exec node dist/index.js gateway --port 18789 --allow-unconfigured
+exec node dist/index.js gateway --bind lan --port 18789 --allow-unconfigured
