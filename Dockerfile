@@ -1,9 +1,10 @@
-FROM python:3.11-slim
-WORKDIR /app
-COPY index.html .
-EXPOSE 18789
-CMD ["python","-m","http.server","18789"]
-# build Thu Oct 15 07:18:43 PM IST 2026
-# build Thu Oct 15 07:18:49 PM IST 2026
-# rebuild Thu Oct 15 07:54:19 PM IST 2026
-# rebuild Thu Oct 15 08:07:13 PM IST 2026
+FROM ghcr.io/openclaw/openclaw:latest
+
+USER root
+
+COPY defaults /opt/oc-defaults
+COPY entrypoint.sh /usr/local/bin/openclaw-gateway-entrypoint
+
+RUN chmod 0755 /usr/local/bin/openclaw-gateway-entrypoint
+
+ENTRYPOINT ["/usr/local/bin/openclaw-gateway-entrypoint"]
